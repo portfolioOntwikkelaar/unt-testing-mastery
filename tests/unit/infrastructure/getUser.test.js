@@ -3,7 +3,7 @@ jest.mock("axios");
 
 // 2. Dan: imports
 const axios = require("axios");
-const getUser = require("../../src/infrastructure/external/getUser");
+const getUser = require("../../../src/infrastructure/external/getUser");
 
 describe("getUser", () => {
   test("fetches user via API", async () => {
