@@ -1,5 +1,5 @@
-function processUser(getUser, notify, userId) {
-  const user = getUser(userId);
+async function processUser(getUser, notify, userId) {
+  const user = await getUser(userId);
 
   if (!user.email) {
     throw new Error("User has no email");

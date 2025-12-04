@@ -3,7 +3,11 @@ const userFactory = require("../../helpers/factories/userFactory");
 
 describe("processUser", () => {
   test("processes user and triggers notification", () => {
-    const fakeUser = userFactory({ name: "Alice" });
+    const fakeUser = {
+    id: 1,
+    name: "Alice",
+    email: "alice@example.com"   
+  };
 
     const getUser = jest.fn().mockReturnValue(fakeUser);
     const notify = jest.fn();
@@ -16,17 +20,20 @@ describe("processUser", () => {
     expect(result).toEqual({
       id: 1,
       name: "ALICE",
-      email: fakeUser.email
+      email: "alice@example.com"
     });
   });
 
   test("throws error if user has no email", () => {
-    const fakeUser = userFactory({ email: null });
+    const fakeUser = {
+    id: 1,
+    name: "Alice",
+    email: null  
+  };
 
     const getUser = jest.fn().mockReturnValue(fakeUser);
-    const notify = jest.fn();
 
-    expect(() => processUser(getUser, notify, 1))
-      .toThrow("User has no email");
-  });
+  expect(() => processUser(getUser, jest.fn(), 1))
+    .toThrow("User has no email");
+});
 });
